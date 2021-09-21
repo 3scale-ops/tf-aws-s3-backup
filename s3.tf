@@ -10,11 +10,13 @@ module "labels" {
 
 ## Bucket
 module "bucket" {
-  source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "2.9.0"
+  source    = "terraform-aws-modules/s3-bucket/aws"
+  providers = { aws = aws.master }
+
   bucket = format("3scale-%s-%s-%s",
     var.environment, var.project, var.workload,
   )
+
   acl                     = "private"
   block_public_acls       = true
   block_public_policy     = true

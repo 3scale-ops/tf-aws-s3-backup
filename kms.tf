@@ -1,6 +1,7 @@
 
 ## Bacukps Bucket key
 resource "aws_kms_key" "bucket" {
+  provider                = aws.master
   description             = format("%s Bacukps Bucket Encryption key", module.labels.id)
   deletion_window_in_days = 30
   policy                  = data.aws_iam_policy_document.bucket_kms_policy.json
@@ -13,6 +14,7 @@ resource "aws_kms_key" "bucket" {
 
 ## Bacukps Bucket Key Alias
 resource "aws_kms_alias" "bucket" {
+  provider      = aws.master
   name          = "alias/${module.labels.id}"
   target_key_id = aws_kms_key.bucket.key_id
 }
@@ -26,7 +28,7 @@ data "aws_iam_policy_document" "bucket_kms_policy" {
 
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${var.aws_account_id}:root"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.master.account_id}:root"]
     }
 
     resources = ["*"]
@@ -45,13 +47,13 @@ data "aws_iam_policy_document" "bucket_kms_policy" {
     condition {
       test     = "StringEquals"
       variable = "kms:ViaService"
-      values   = ["ec2.${var.aws_region}.amazonaws.com"]
+      values   = ["ec2.${data.aws_region.master.name}.amazonaws.com"]
     }
 
     condition {
       test     = "StringEquals"
       variable = "kms:CallerAccount"
-      values   = [var.aws_account_id]
+      values   = [data.aws_caller_identity.master.account_id]
     }
 
     resources = ["*"]
