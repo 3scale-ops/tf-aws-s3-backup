@@ -8,14 +8,19 @@ module "labels" {
   tf_config   = var.tf_config
 }
 
+## Locals
+locals {
+  master_bucket_id = format("3scale-%s-%s-%s",
+    var.environment, var.project, var.workload,
+  )
+}
+
 ## Bucket
 module "bucket" {
   source    = "terraform-aws-modules/s3-bucket/aws"
   providers = { aws = aws.master }
 
-  bucket = format("3scale-%s-%s-%s",
-    var.environment, var.project, var.workload,
-  )
+  bucket = local.master_bucket_id
 
   acl                     = "private"
   block_public_acls       = true
@@ -40,6 +45,8 @@ module "bucket" {
 
   lifecycle_rule = local.backup_lifecycle_rules
 
-  tags = module.labels.tags
-
+  tags = merge(
+    module.labels.tags,
+    tomap({ "Name" = local.master_bucket_id })
+  )
 }
