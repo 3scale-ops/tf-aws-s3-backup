@@ -1,4 +1,35 @@
+# ------------------------------------------------------------------------------
+# Resource Labels
+# ------------------------------------------------------------------------------
+module "labels" {
+  source      = "git@github.com:3scale-ops/tf-aws-label.git?ref=tags/0.1.2"
+  project     = var.project
+  environment = var.environment
+  workload    = var.workload
+  type        = "s3"
+  tf_config   = var.tf_config
+}
+
 locals {
+
+  # ------------------------------------------------------------------------------
+  # Master Bucket Id
+  # ------------------------------------------------------------------------------
+
+  master_bucket_id = format("3scale-%s-%s-%s",
+    var.environment, var.project, var.workload,
+  )
+
+  # ------------------------------------------------------------------------------
+  # Replica Bucket Id
+  # ------------------------------------------------------------------------------
+
+  replica_bucket_id = format("%s-replica", local.master_bucket_id)
+
+  # ------------------------------------------------------------------------------
+  # Bucket Object Lifecycle Rules
+  # ------------------------------------------------------------------------------
+
   backup_lifecycle_rules = [
     {
       # Default rule
@@ -149,4 +180,5 @@ locals {
       }
     }
   ]
+
 }
