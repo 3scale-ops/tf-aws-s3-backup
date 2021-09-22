@@ -16,8 +16,8 @@ locals {
   # Master Bucket Id
   # ------------------------------------------------------------------------------
 
-  master_bucket_id = format("3scale-%s-%s-%s",
-    var.environment, var.project, var.workload,
+  master_bucket_id = format("%s-%s-%s-%s",
+    var.bucket_name_prefix, var.environment, var.project, var.workload,
   )
 
   # ------------------------------------------------------------------------------

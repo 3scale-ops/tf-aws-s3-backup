@@ -1,3 +1,9 @@
+variable "bucket_name_prefix" {
+  type        = string
+  default     = "3scale"
+  description = "Environment (dev/stg/pro)"
+}
+
 variable "environment" {
   type        = string
   default     = ""
