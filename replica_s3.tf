@@ -13,7 +13,7 @@ module "replica" {
   block_public_policy     = true
   restrict_public_buckets = true
   ignore_public_acls      = true
-  force_destroy           = false
+  force_destroy           = var.prevent_destroy ? false : true
 
   versioning = {
     enabled = true

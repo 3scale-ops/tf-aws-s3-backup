@@ -4,14 +4,17 @@
 
 # Master Bucket key ------------------------------------------------------------
 resource "aws_kms_key" "master" {
-  provider                = aws.master
-  description             = format("%s primary bucket encryption key", module.labels.id)
-  deletion_window_in_days = 30
-  policy                  = data.aws_iam_policy_document.master_kms.json
+  provider = aws.master
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  description = format("%s primary bucket encryption key", module.labels.id)
+  policy      = data.aws_iam_policy_document.master_kms.json
+
+  deletion_window_in_days = 30
+
+  # https://github.com/hashicorp/terraform/issues/3116
+  # lifecycle {
+  #   prevent_destroy = var.prevent_destroy
+  # }
 
   tags = merge(
     module.labels.tags,

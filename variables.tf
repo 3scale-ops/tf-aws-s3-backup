@@ -1,3 +1,9 @@
+variable "prevent_destroy" {
+  type        = bool
+  default     = true
+  description = "Flag to allow destruction of sensitive objects."
+}
+
 variable "bucket_name_prefix" {
   type        = string
   default     = "3scale"

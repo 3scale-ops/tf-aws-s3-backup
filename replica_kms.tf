@@ -11,9 +11,10 @@ resource "aws_kms_key" "replica" {
 
   deletion_window_in_days = 30
 
-  lifecycle {
-    prevent_destroy = true
-  }
+  # https://github.com/hashicorp/terraform/issues/3116
+  # lifecycle {
+  #   prevent_destroy = var.prevent_destroy
+  # }
 
   tags = merge(
     module.labels.tags,
