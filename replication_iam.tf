@@ -1,4 +1,9 @@
 locals {
+
+  # ----------------------------------------------------------------------------
+  # S3 Replication Configuration for the master bucket
+  # ----------------------------------------------------------------------------
+
   backup_replication_configuration = {
     role = aws_iam_role.replication.arn
 
@@ -147,6 +152,9 @@ data "aws_iam_policy_document" "replication" {
   }
 
   # kms:Decrypt - Permissions for the KMS key used to decrypt the source object
+  # Note: When an S3 Bucket Key is enabled for the source and destination bucket,
+  # the encryption context will be the bucket Amazon Resource Name (ARN)
+  # and not the object ARN, for example, arn:aws:s3:::bucket_ARN.
   statement {
     actions = [
       "kms:Decrypt"
@@ -160,12 +168,15 @@ data "aws_iam_policy_document" "replication" {
     condition {
       test     = "StringLike"
       variable = "kms:EncryptionContext:aws:s3:arn"
-      values   = [format("arn:aws:s3:::%s/*", local.master_bucket_id)]
+      values   = [format("arn:aws:s3:::%s", local.master_bucket_id)]
     }
     resources = [aws_kms_key.master.arn]
   }
 
   # kms:Encrypt - Permissions for the KMS key used to encrypt the object replica
+  # Note: When an S3 Bucket Key is enabled for the source and destination bucket,
+  # the encryption context will be the bucket Amazon Resource Name (ARN)
+  # and not the object ARN, for example, arn:aws:s3:::bucket_ARN.
   statement {
     actions = [
       "kms:Encrypt"
@@ -179,7 +190,7 @@ data "aws_iam_policy_document" "replication" {
     condition {
       test     = "StringLike"
       variable = "kms:EncryptionContext:aws:s3:arn"
-      values   = [format("%s/*", module.replica.s3_bucket_arn)]
+      values   = [format("%s", module.replica.s3_bucket_arn)]
     }
     resources = [aws_kms_key.replica.arn]
   }
