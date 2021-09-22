@@ -29,7 +29,7 @@ module "master" {
     }
   }
 
-  lifecycle_rule = local.backup_lifecycle_rules
+  lifecycle_rule = local.common_lifecycle_rules
 
   replication_configuration = local.replication_configuration
 

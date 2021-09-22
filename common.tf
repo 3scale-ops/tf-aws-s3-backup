@@ -26,11 +26,11 @@ locals {
 
   replica_bucket_id = format("%s-replica", local.master_bucket_id)
 
-  # ------------------------------------------------------------------------------
-  # Bucket Object Lifecycle Rules
-  # ------------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
+  # S3 Lifecycle Rules for both master and replica bucket
+  # ----------------------------------------------------------------------------
 
-  backup_lifecycle_rules = [
+  common_lifecycle_rules = [
     {
       # Default rule
       # For objects when no other policy takes precedence
