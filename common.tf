@@ -49,12 +49,12 @@ locals {
       }
     },
     {
-      # Long-term Glacier rule
+      # 1 year Glacier rule
       # For objects tagged with `Retention: Long-term` and `Archive: Glacier`
       # - Removes versions after 24 hours
       # - Moves to Glacier after 48 hours
       # - Expires after 1 year
-      id      = "1y Glacier"
+      id      = "1 year Glacier"
       enabled = true
       tags = {
         Retention = "1y",
@@ -73,14 +73,14 @@ locals {
       }
     },
     {
-      # 1y rule
+      # 1 year rule
       # For objects tagged with `Retention: 1y`
       # - Removes versions after 24 hours
       # - Expires after 1 year
-      id      = "1y"
+      id      = "1 year"
       enabled = true
       tags = {
-        Retention = "Long-term"
+        Retention = "1y"
       }
       expiration = {
         days = 360

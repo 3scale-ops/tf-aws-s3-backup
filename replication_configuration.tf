@@ -9,7 +9,7 @@ locals {
 
     rules = [
       {
-        id       = "90d"
+        id       = "90d retention objects"
         status   = "Enabled"
         priority = 10
 

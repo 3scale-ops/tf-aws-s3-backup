@@ -1,7 +1,7 @@
 variable "bucket_name_prefix" {
   type        = string
   default     = "3scale"
-  description = "Environment (dev/stg/pro)"
+  description = "Bucket name prefix, as S3 bucket ids should be unique."
 }
 
 variable "environment" {
@@ -18,7 +18,7 @@ variable "project" {
 
 variable "workload" {
   type        = string
-  default     = ""
+  default     = "backup"
   description = "Workload"
 }
 
