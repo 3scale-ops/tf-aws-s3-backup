@@ -31,7 +31,7 @@ module "master" {
 
   lifecycle_rule = local.backup_lifecycle_rules
 
-  replication_configuration = local.backup_replication_configuration
+  replication_configuration = local.replication_configuration
 
   tags = merge(
     module.labels.tags,
