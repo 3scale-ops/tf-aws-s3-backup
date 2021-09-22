@@ -166,6 +166,11 @@ resource "aws_s3_bucket_policy" "replica" {
 
   bucket = module.replica.s3_bucket_id
   policy = data.aws_iam_policy_document.replica.json
+
+  depends_on = [
+    aws_iam_policy.replication,
+    module.replica
+  ]
 }
 
 # replica bucket policy document -----------------------------------------------
