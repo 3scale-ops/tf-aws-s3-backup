@@ -99,7 +99,7 @@ locals {
       # - Removes versions after 7 days
       # - Moves to Glacier after 7 days
       # - Expires after 90 days in Glacier (97 since creation)
-      id      = "90 day Glacier expiration"
+      id      = "90 day Glacier"
       enabled = true
       tags = {
         Retention = "90d"
@@ -122,7 +122,7 @@ locals {
       # For objects tagged with `Retention: 90d`
       # - Removes versions after 7 days
       # - Expires after 97 days (to match 90 day glacier policy)
-      id      = "90 day expiration"
+      id      = "90 day"
       enabled = true
       tags = {
         Retention = "90d"
@@ -139,7 +139,7 @@ locals {
       # For objects tagged with `Retention: 30d`
       # - Removes versions after 7 days
       # - Expires after 30 days
-      id      = "30 day expiration"
+      id      = "30 day"
       enabled = true
       tags = {
         Retention = "30d"
@@ -155,7 +155,7 @@ locals {
       # 7d expiration rule
       # For objects tagged with `Retention: 7d`
       # - Expires after 7 days
-      id      = "7d day expiration"
+      id      = "7d day"
       enabled = true
       tags = {
         Retention = "7d"
@@ -171,7 +171,7 @@ locals {
       # 3d expiration rule
       # For objects tagged with `Retention: 3d`
       # - Expires after 3 days
-      id      = "3d day expiration"
+      id      = "3d day"
       enabled = true
       tags = {
         Retention = "3d"

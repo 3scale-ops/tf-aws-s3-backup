@@ -22,22 +22,22 @@ retention polices based on tags and cross-account-and-region replication.
 
 ### Lifecycle Rules
 
-| Lifecycle rule name       | Scope                                         | Current version transitions          | Current version Expiration | Previous version expiration |
-| ------------------------- | --------------------------------------------- | ------------------------------------ | -------------------------- | --------------------------- |
-| No expiration (Default)   | Entire bucket                                 | Transition to Glacier after 1 year   | Never                      | Deleted after 15 days       |
-| 1 year Glacier            | Tags: `Archive: Glacier` and `Retention: 1y`  | Transition to Glacier after 48 hours | After 1 year               | Deleted after 24 hours      |
-| 1 year                    | Tags: `Retention: 1y`                         | No transition                        | After 1 year               | Deleted after 24 hours      |
-| 90 day Glacier expiration | Tags: `Archive: Glacier` and `Retention: 90d` | Transition to Glacier after 7 days   | After 97 days              | After 7 days                |
-| 90 day expiration         | Tags: `Retention: 90d`                        | No transition                        | After 97 days              | After 7 days                |
-| 30 day expiration         | Tags: `Retention: 30d`                        | No transition                        | After 30 days              | After 7 days                |
-| 7d day expiration         | Tags: `Retention: 7d`                         | No transition                        | After 7 days               | After 7 days                |
-| 3d day expiration         | Tags: `Retention: 3d`                         | No transition                        | After 3 days               | After 3 days                |
+| Lifecycle rule name | Scope                                        | Current version transitions | Current version Expiration | Previous version expiration |
+| ------------------- | -------------------------------------------- | --------------------------- | -------------------------- | --------------------------- |
+| No expiration       | Entire bucket                                | Glacier after 1 year        | Never                      | Deleted after 15 days       |
+| 1 year Glacier      | Tags `Archive: Glacier` and `Retention: 1y`  | Glacier after 48 hours      | After 1 year               | Deleted after 24 hours      |
+| 1 year              | Tags `Retention: 1y`                         | No transition                 | After 1 year               | Deleted after 24 hours      |
+| 90 day Glacier      | Tags `Archive: Glacier` and `Retention: 90d` | Glacier after 7 days        | After 97 days              | After 7 days                |
+| 90 day              | Tags `Retention: 90d`                        | No transition               | After 97 days              | After 7 days                |
+| 30 day              | Tags `Retention: 30d`                        | No transition               | After 30 days              | After 7 days                |
+| 7d day              | Tags `Retention: 7d`                         | No transition               | After 7 days               | After 7 days                |
+| 3d day              | Tags `Retention: 3d`                         | No transition               | After 3 days               | After 3 days                |
 
 ### Replication Rules
 
-| Replication rule name | Scope                  | Replica Lifecycle                                                                   |
-| --------------------- | ---------------------- | ----------------------------------------------------------------------------------- |
-| 90d retention objects | Tags: `Retention: 90d` | Same lifecycle rules as master: `90 day expiration` and `90 day Glacier expiration` |
+| Replication rule name | Scope                  | Replica Lifecycle                                                         |
+| --------------------- | ---------------------- | ------------------------------------------------------------------------- |
+| 90d retention objects | Tags: `Retention: 90d` | Same lifecycle rules as master: `90 day ` and `90 day Glacier expiration` |
 
 **Important**
 
