@@ -4,6 +4,7 @@
 
 module "replica" {
   source    = "terraform-aws-modules/s3-bucket/aws"
+  version   = "v2.9.0"
   providers = { aws = aws.replica }
 
   bucket = local.replica_bucket_id
