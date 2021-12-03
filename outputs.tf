@@ -13,6 +13,11 @@ output "kms_master_bucket_key_id" {
   description = "The master KMS bucket key id."
 }
 
+output "kms_master_bucket_key_arn" {
+  value       = aws_kms_key.master.arn
+  description = "The master KMS bucket key arn."
+}
+
 output "s3_replica_bucket_id" {
   value       = module.replica.s3_bucket_id
   description = "The name bucket id (bucket name)."
@@ -26,4 +31,9 @@ output "s3_replica_bucket_arn" {
 output "kms_replica_bucket_key_id" {
   value       = aws_kms_key.replica.key_id
   description = "The replica KMS bucket key id."
+}
+
+output "kms_replica_bucket_key_arn" {
+  value       = aws_kms_key.replica.arn
+  description = "The replica KMS bucket key arn."
 }
