@@ -35,9 +35,10 @@ retention polices based on tags and cross-account-and-region replication.
 
 ### Replication Rules
 
-| Replication rule name | Scope                  | Replica Lifecycle                                                         |
-| --------------------- | ---------------------- | ------------------------------------------------------------------------- |
-| 90d retention objects | Tags: `Retention: 90d` | Same lifecycle rules as master: `90 day ` and `90 day Glacier expiration` |
+| Replication rule name  | Scope                  | Replica Lifecycle                                                         |
+| ---------------------- | ---------------------- | ------------------------------------------------------------------------- |
+| 90d retention objects  | Tags: `Retention: 90d` | Same lifecycle rules as master: `90 day ` and `90 day Glacier expiration` |
+| Archive prefix objects | Prefix: `archive`      | Same lifecycle rules as master                                            |
 
 **Important**
 
