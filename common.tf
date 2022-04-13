@@ -182,6 +182,22 @@ locals {
       expiration = {
         days = 3
       }
+    },
+    {
+      # 24h expiration rule
+      # For objects tagged with `Retention: 24h`
+      # - Expires after 24 hours
+      id      = "24 hours"
+      enabled = true
+      tags = {
+        Retention = "1d"
+      }
+      noncurrent_version_expiration = {
+        days = 1
+      }
+      expiration = {
+        days = 1
+      }
     }
   ]
 

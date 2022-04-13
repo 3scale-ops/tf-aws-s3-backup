@@ -32,6 +32,7 @@ retention polices based on tags and cross-account-and-region replication.
 | 30 day              | Tags `Retention: 30d`                        | No transition               | After 30 days              | After 7 days                |
 | 7d day              | Tags `Retention: 7d`                         | No transition               | After 7 days               | After 7 days                |
 | 3d day              | Tags `Retention: 3d`                         | No transition               | After 3 days               | After 3 days                |
+| 24h hours           | Tags `Retention: 24h`                        | No transition               | After 24 hours             | After 24 hours              |
 
 ### Replication Rules
 
