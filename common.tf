@@ -177,7 +177,7 @@ locals {
         Retention = "3d"
       }
       noncurrent_version_expiration = {
-        days = 3
+        days = 1
       }
       expiration = {
         days = 3
