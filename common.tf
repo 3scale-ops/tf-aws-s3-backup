@@ -161,7 +161,7 @@ locals {
         Retention = "7d"
       }
       noncurrent_version_expiration = {
-        days = 7
+        days = 3
       }
       expiration = {
         days = 7
@@ -177,10 +177,26 @@ locals {
         Retention = "3d"
       }
       noncurrent_version_expiration = {
-        days = 3
+        days = 1
       }
       expiration = {
         days = 3
+      }
+    },
+    {
+      # 24h expiration rule
+      # For objects tagged with `Retention: 24h`
+      # - Expires after 24 hours
+      id      = "24 hours"
+      enabled = true
+      tags = {
+        Retention = "1d"
+      }
+      noncurrent_version_expiration = {
+        days = 1
+      }
+      expiration = {
+        days = 1
       }
     }
   ]
