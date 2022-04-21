@@ -190,7 +190,7 @@ locals {
       id      = "24 hours"
       enabled = true
       tags = {
-        Retention = "1d"
+        Retention = "24h"
       }
       noncurrent_version_expiration = {
         days = 1
