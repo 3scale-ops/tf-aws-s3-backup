@@ -144,7 +144,8 @@ data "aws_iam_policy_document" "replication" {
   # and not the object ARN, for example, arn:aws:s3:::bucket_ARN.
   statement {
     actions = [
-      "kms:Decrypt"
+      "kms:Decrypt",
+      "kms:GenerateDataKey"
     ]
     effect = "Allow"
     condition {
@@ -166,7 +167,8 @@ data "aws_iam_policy_document" "replication" {
   # and not the object ARN, for example, arn:aws:s3:::bucket_ARN.
   statement {
     actions = [
-      "kms:Encrypt"
+      "kms:Encrypt",
+      "kms:GenerateDataKey"
     ]
     effect = "Allow"
     condition {

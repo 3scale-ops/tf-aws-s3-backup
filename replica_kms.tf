@@ -75,7 +75,7 @@ data "aws_iam_policy_document" "kms_replica" {
 
     sid       = "Enable Cross Account Encrypt access for S3 Replication"
     effect    = "Allow"
-    actions   = ["kms:Encrypt"]
+    actions   = ["kms:GenerateDataKey", "kms:Encrypt"]
     resources = ["*"]
 
     principals {
