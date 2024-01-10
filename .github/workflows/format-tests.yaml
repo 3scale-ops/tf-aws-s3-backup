@@ -6,7 +6,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: quay.io/3scale/soyuz:v0.3.0-ci
+    container: quay.io/3scale/soyuz:v4.5.0-ci
     steps:
       - uses: actions/checkout@v2
 
