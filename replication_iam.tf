@@ -35,11 +35,15 @@ data "aws_iam_policy_document" "s3_assume" {
     ]
 
     principals {
-      type        = "Service"
-      identifiers = ["s3.amazonaws.com"]
+      type = "Service"
+      identifiers = [
+        "s3.amazonaws.com",
+        "batchoperations.s3.amazonaws.com"
+      ]
     }
   }
 }
+
 
 # master-replica replication IAM policy ----------------------------------------
 resource "aws_iam_policy" "replication" {
@@ -57,6 +61,30 @@ resource "aws_iam_policy" "replication" {
 
 # master-replica replication IAM policy document -------------------------------
 data "aws_iam_policy_document" "replication" {
+
+  # https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-batch-replication-policies.html
+  statement {
+    sid    = "AllowPrimaryToInitiateReplication"
+    effect = "Allow"
+    actions = [
+      "s3:InitiateReplication"
+    ]
+    resources = [
+      format("arn:aws:s3:::%s/*", local.master_bucket_id)
+    ]
+  }
+
+  statement {
+    sid    = "AllowPrimaryToBatchReplication"
+    effect = "Allow"
+    actions = [
+      "s3:PutInventoryConfiguration",
+      "s3:GetReplicationConfiguration"
+    ]
+    resources = [
+      format("arn:aws:s3:::%s", local.master_bucket_id)
+    ]
+  }
 
   # s3:GetReplicationConfiguration and s3:ListBucket—Permissions
   # for these actions on the source bucket allow Amazon S3
@@ -116,7 +144,8 @@ data "aws_iam_policy_document" "replication" {
   # and not the object ARN, for example, arn:aws:s3:::bucket_ARN.
   statement {
     actions = [
-      "kms:Decrypt"
+      "kms:Decrypt",
+      "kms:GenerateDataKey"
     ]
     effect = "Allow"
     condition {
@@ -138,7 +167,8 @@ data "aws_iam_policy_document" "replication" {
   # and not the object ARN, for example, arn:aws:s3:::bucket_ARN.
   statement {
     actions = [
-      "kms:Encrypt"
+      "kms:Encrypt",
+      "kms:GenerateDataKey"
     ]
     effect = "Allow"
     condition {
